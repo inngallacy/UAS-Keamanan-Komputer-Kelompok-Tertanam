@@ -1,4 +1,3 @@
-
 # Uji Penetrasi pada Sistem Kendali Pintu Pintar Berbasis Mikrokontroler: Analisis Dampak Serangan DDoS Terhadap Stabilitas Koneksi.
 
 ---
@@ -33,7 +32,7 @@ Sistem ini menggunakan mikrokontroler ESP32 sebagai otak utama yang mengatur sen
 * **Proses:** ESP32 memvalidasi data. Jika benar, Servo bergerak membuka pintu.
 * **Output:** Status ditampilkan di LCD dan data akses dikirim ke server/monitoring.
 * **Kelemahan:** Koneksi Wi-Fi pada mikrokontroler rentan terhadap beban trafik tinggi.
-
+---
 ### 2. Skematik dan projek
 Berikut adalah rancangan perangkat keras 
 
@@ -44,7 +43,7 @@ Berikut adalah rancangan perangkat keras
 * **Mikrokontroler:** NodeMCU (ESP32).
 * **Sensor:** RFID & Keypad 4x4.
 * **Output:** Servo, LCD 16x2, Buzzer.
-* 
+---
 ## 3 Target Pengujian
 Target serangan adalah antarmuka jaringan nirkabel pada mikrokontroler yang menghubungkan alat dengan internet.
 
@@ -56,9 +55,9 @@ Target serangan adalah antarmuka jaringan nirkabel pada mikrokontroler yang meng
 ### 1. Persiapan & Pengecekan Adapter WiFi (*Network Interface Setup*)
 
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/d39a5f52-3698-4edf-8f6a-296c7751f957" />
- Tahap awal ini bertujuan untuk memastikan bahwa adapter WiFi pada komputer penyerang (Kali Linux) sudah terdeteksi, aktif, dan mampu menangkap sinyal dari jaringan target.
 
-Cek Status Interface (`wlan0`)
+Tahap awal ini bertujuan untuk memastikan bahwa adapter WiFi pada komputer penyerang (Kali Linux) sudah terdeteksi, aktif, dan mampu menangkap sinyal dari jaringan target.
+
 Langkah pertama adalah memeriksa apakah sistem operasi mendeteksi perangkat keras kartu jaringan nirkabel
 Perintah ini menampilkan daftar antarmuka jaringan. Pastikan muncul interface bernama wlan0, yang menandakan adapter WiFi siap digunakan.
 ---
@@ -67,10 +66,10 @@ Perintah ini menampilkan daftar antarmuka jaringan. Pastikan muncul interface be
 ### 2. Membuat Script Ddos Untuk membanjiri lalu lintas jaringan
 <img width="500" height="160" alt="image" src="https://github.com/user-attachments/assets/dfc57004-97f3-4ac0-b6c4-13621b98ac79" />
 
- Gambar ini menampilkan aktivitas pemrograman di dalam terminal Linux, di mana pengguna bernama Fathur sedang membuat alat untuk serangan jaringan. Pada baris pertama, pengguna mengetikkan perintah nano wifidos.py yang bertujuan membuka editor teks Nano untuk menulis skrip bahasa pemrograman Python bernama "wifidos". Nama berkas ini mengindikasikan bahwa kode tersebut dirancang untuk melakukan WiFi Denial of Service (DoS), yaitu sebuah metode serangan siber untuk memutus koneksi internet orang lain dengan cara membanjiri lalu lintas jaringan WiFi tersebut.
+ Gambar ini menampilkan aktivitas pemrograman di dalam terminal Linux, di mana pengguna bernama Fathur sedang membuat alat untuk serangan jaringan. Pada baris pertama, pengguna mengetikkan perintah nano wifidos.py yang bertujuan membuka editor teks Nano untuk menulis skrip bahasa pemrograman Python bernama "wifidos". Nama berkas ini mengindikasikan bahwa kode tersebut dirancang untuk melakukan WiFi Denial of Service (DoS), yaitu sebuah metode serangan siber untuk memutus koneksi internet orang lain dengan cara membanjiri lalu lintas jaringan WiFi tersebut. 
 
 Setelah selesai, pengguna mengetikkan perintah ls pada baris berikutnya untuk memeriksa isi direktori atau folder tempat ia bekerja. Hasil dari perintah tersebut terlihat di bagian paling bawah layar, yang menampilkan daftar folder standar seperti Desktop dan Documents, serta membuktikan bahwa berkas wifidos.py telah berhasil dibuat dan tersimpan di dalam sistem. Intinya, gambar ini merekam momen ketika seseorang sedang menyiapkan kode program yang berfungsi untuk mengganggu stabilitas jaringan nirkabel.
-
+---
 ### 3. Isi Penulisan Script 
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/f89ff0a2-fd8d-44f7-9933-e0c1367d7840" />
 Bagian kode yang terlihat di layar ini fokus pada persiapan sistem dan manajemen file sebelum serangan jaringan yang sebenarnya dilakukan. 
@@ -85,6 +84,7 @@ ini isi script dari gambar tersebut
 ---
 
 ### 4: Eksekusi Script & Pemilihan Interface
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/dd09c8b5-e2ac-4601-b711-6290eba1f1e7" />
 
 Jalankan script menggunakan perintah `sudo` dan `python3`. Pada tahap ini, script akan memindai sistem untuk mencari *wireless adapter* yang kompatibel.
 
@@ -173,13 +173,13 @@ ping google.com -t
 1. Sebelum Serangan: Terlihat respon Reply from..., menandakan internet lancar.
 2. Saat Serangan Berjalan: Muncul pesan Request timed out. atau Destination host unreachable.
 3. Kesimpulan: Paket DeAuth berhasil memaksa perangkat target terputus dari Router/Access Point, sehingga akses internet lumpuh total.
-
+---
 ##  Langkah-Langkah Pengujian Yang Kedua (pakai ip yg terhubung ke alatnya)  
 ### 1. Mencari alamat ip jaringan pada alat
 <img width="500" height="480" alt="image" src="https://github.com/user-attachments/assets/d20074ed-fe3b-4677-a69f-977419cc91a2" />
 
 Pada langkah pengujian keduaini , pengujian dilakukan dengan menargetkan alamat IP dari Smart Door Lock (192.168.1.22). Tujuan dari pengujian ini adalah untuk mengevaluasi stabilitas mikrokontroler perangkat ketika menerima lalu lintas jaringan yang tidak wajar
-
+---
 ### 2. Menginstal paket git
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/729a59df-83a6-46b8-81cb-e21085ca4657" />
 
@@ -189,5 +189,45 @@ git clone https://github.com/palahsu/DDoS-Ripper.git
 ```
 fungsi ini mengambil salinan kode program dari server GitHub milik pengembang ke komputer lokal kita. Setelah unduhan selesai, kita harus masuk ke dalam folder alat tersebut untuk memastikan siap digunakan. 
 'cd DDoS-Ripper' Perintah untuk berpindah masuk ke dalam folder hasil unduhan tadi.
+---
+### 3. Eksekusi Script & Pemilihan Parameter Serangan
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/279f7ff2-7744-40e3-983e-c3506d4e064c" />
 
+setelah proses cloning selesai, tahap selanjutnya adalah menjalankan program utama DRipper.py. Dari daftar parameter yang tersedia, kita memilih opsi -s (Server IP) opsi ini digunakan untuk menargetkan alamat IP spesifik. Ini sesuai dengan pengujian kita di mana targetnya adalah Smart Door Lock dengan IP 192.168.1.22. perintah bawah  untuk memulai serangan ke Smart Door Lock kita adalah:
+
+```Bash
+python3 DRipper.py -s 192.168.1.22 -t 135
+```
+---
+### 4. Monitoring Proses Serangan (Packet Flooding)
+Setelah perintah eksekusi dijalankan dengan parameter IP target, alat DDoS-Ripper akan segera memulai proses pengiriman paket data secara massal.
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/b216b110-4566-4c61-a775-a2b26b8a9df5" />
+
+analisis output terminal 
+1. 192.168.1.22: Memverifikasi bahwa serangan terkunci pada IP Smart Door Lock.
+2. port 80: Menunjukkan serangan diarahkan ke port web server (HTTP) pada perangkat.
+3. turbo: 135: Menunjukkan tingkat kecepatan serangan yang digunakan.
+
+Log Aktivitas:
+1. Pesan packet sent! rippering yang muncul berulang kali dengan sangat cepat menunjukkan bahwa script berhasil mengirimkan beban data ke target tanpa henti.
+2. Mon Dec 8 ...: Stempel waktu (timestamp) membuktikan bahwa serangan dilakukan secara real-time.
+
+Indikator Keberhasilan Tahap Ini: Jika pesan ini terus mengalir tanpa henti dan tidak ada pesan error (seperti "Connection Refused"), berarti alat penyerang memiliki jalur koneksi yang terbuka ke Smart Door Lock dan sedang membanjiri sumber daya jaringannya.
+---
+### 5. Verifikasi Hasil Serangan
+Setelah berhasil di run otomatis alat yg terhubung ke wifi dengan ip tersebut akan mengalami RTO.
+<img width="500" height="514" alt="image" src="https://github.com/user-attachments/assets/b661e91a-1723-4e8e-a092-6fc850ff0552" />
+Seperti yang terlihat pada gambar hasil pengujian, terjadi perubahan drastis pada respons perangkat saat serangan dimulai.
+
+1. Kondisi Sebelum Serangan (Normal) Pada baris-baris awal, Smart Door Lock merespons dengan normal: Reply from 192.168.1.22: bytes=32 time=8ms TTL=64 Ini menandakan perangkat terhubung ke jaringan dan CPU mikrokontroler mampu memproses perintah standar.
+2. Kondisi Saat Serangan Berlangsung (Down) Sesaat setelah script DDoS-Ripper dijalankan dan membanjiri target dengan paket data, respons berubah menjadi: Request timed out.
+
+Analisis Teknis: Fenomena Request Timed Out (RTO) ini terjadi karena mikrokontroler pada Smart Door Lock mengalami Resource Exhaustion (Kelelahan Sumber Daya).
+1. CPU Overload: Prosesor perangkat terlalu sibuk menangani ribuan paket sampah yang dikirimkan oleh alat penyerang.
+2. Network Congestion: Antrian data pada kartu jaringan (network stack) perangkat penuh.
+
+Akibatnya, perangkat tidak lagi memiliki sisa kapasitas untuk membalas paket ping yang sah, apalagi merespons perintah "Buka Pintu" dari alat pengguna.
+---
+## Kesimpulan
+Berdasarkan pengujian ini, dapat disimpulkan bahwa Smart Door Lock dengan IP 192.168.1.22 rentan terhadap serangan Denial of Service (DoS) berbasis IP Flooding. Alat DDoS-Ripper berhasil melumpuhkan koneksi perangkat hanya dalam hitungan detik, menyebabkan perangkat gagal berfungsi (gagal merespons perintah) selama serangan berlangsung.
 
