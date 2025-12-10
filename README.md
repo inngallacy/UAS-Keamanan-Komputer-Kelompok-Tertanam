@@ -144,6 +144,8 @@ Contoh: 192.168.1.22
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/729a59df-83a6-46b8-81cb-e21085ca4657" />
 
 
+Perintah pertama yang dijalankan adalah sudo apt install git.Perintah ini digunakan untuk menginstal aplikasi Git ke dalam sistem operasi Kali Linux. Git merupakan perangkat lunak Version Control System. Dalam konteks ini, Git wajib diinstal agar sistem bisa terhubung dan mengunduh kode program yang ada di situs GitHub. Tanpa Git, kita tidak bisa melakukan perintah cloning.
+
 ```bash
 git clone https://github.com/palahsu/DDoS-Ripper.git
 cd DDoS-Ripper
@@ -152,7 +154,10 @@ cd DDoS-Ripper
 ## **3. Menjalankan Serangan Packet Flooding**
 
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/279f7ff2-7744-40e3-983e-c3506d4e064c" />
+  
 
+Setelah proses cloning selesai, tahap selanjutnya adalah menjalankan program utama DRipper.py menggunakan interpreter Python 3. Saat script berhasil dijalankan, antarmuka utama (interface) alat akan muncul menampilkan banner ASCII "DDOS RIPPER" beserta daftar opsi penggunaan.
+interface ini memberikan informasi bahwa pengguna harus menyertakan argumen khusus untuk menentukan target.
 
 ```bash
 python3 DRipper.py -s 192.168.1.22 -t 135
@@ -161,7 +166,9 @@ python3 DRipper.py -s 192.168.1.22 -t 135
 Parameter:
 
 * **-s:** alamat IP target
+  Opsi ini digunakan untuk menargetkan alamat IP spesifik. Ini sesuai dengan skenario pengujian kita di mana targetnya adalah Smart Door Lock dengan IP 192.168.1.22.
 * **-t:** turbo (kecepatan serangan)
+  Menunjukkan serangan diarahkan ke port web server (HTTP) pada perangkat.
 
 ## **4. Monitoring Serangan**
 <img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/b216b110-4566-4c61-a775-a2b26b8a9df5" />
@@ -183,6 +190,15 @@ Pada saat serangan berjalan:
 * Menandakan perangkat overload dan tidak mampu merespons
 
 ---
+Pengujian Pertama: Serangan via SSID (WiFi DeAuth Attack)
+Pengujian tahap pertama berfokus pada pemutusan koneksi nirkabel. Langkah awal dimulai dengan memastikan adapter Wi-Fi (wlan0) terdeteksi dan siap beroperasi dalam mode monitor. Selanjutnya, dibuat script Python bernama wifidos.py yang berfungsi untuk membersihkan log lama, menyiapkan adapter, dan menjalankan logika serangan.
+
+Setelah script dieksekusi menggunakan perintah sudo python3 wifidos.py, program akan memindai jaringan di sekitar untuk mendapatkan SSID, BSSID, dan channel target. Setelah target dipilih, script mengirimkan paket Deauthentication secara terus-menerus yang memaksa perangkat target terputus dari Wi-Fi. Verifikasi keberhasilan dilakukan melalui uji ping ke Google; hasilnya menunjukkan perubahan status dari koneksi normal menjadi Request Timed Out saat serangan dilancarkan, menandakan koneksi internet telah terputus total.
+
+Pengujian Kedua: Serangan via Alamat IP (DDoS Flooding)
+Pengujian tahap kedua menargetkan sumber daya mikrokontroler melalui alamat IP (contoh: 192.168.1.22). Proses dimulai dengan menginstal alat pengujian DDoS-Ripper dari GitHub menggunakan perintah git clone. Serangan Packet Flooding kemudian dijalankan dengan perintah python3 DRipper.py yang menyertakan parameter -s untuk IP target dan -t untuk kecepatan serangan (turbo).
+
+Selama proses ini, terminal monitoring menunjukkan bahwa paket data dikirimkan secara masif dan terus-menerus ke port 80 (HTTP) milik ESP32. Dampak serangan diverifikasi melalui uji ping, di mana respons perangkat berubah menjadi Request Timed Out (RTO). Hal ini membuktikan bahwa mikrokontroler mengalami kelebihan beban (overload) sehingga gagal merespons permintaan yang sah dan kehilangan koneksi jaringan.
 
 # **Kesimpulan**
 
